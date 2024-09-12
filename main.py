@@ -108,8 +108,6 @@ print(whale_by_year)
 print(whale_by_year.head())
 print(whale_by_year.columns)
 
-
-
 # Plot Whale Species Count
 fig, ax1 = plt.subplots()
 whale_type_counts.plot(kind='bar', ax=ax1, color='skyblue')
@@ -288,4 +286,35 @@ plt.ylabel('Number of Whale Strandings')
 plt.legend()
 plt.show()
 
+from mpl_toolkits.mplot3d import Axes3D
 
+# Step 1: Re-create the whale_by_year DataFrame and ensure 'Year of Observation' is included
+whale_by_year = excel_data_df.groupby(['Year of Observation']).count().reset_index()
+
+# Rename 'Year of Observation' to 'Year' for consistency
+whale_by_year.rename(columns={'Year of Observation': 'Year'}, inplace=True)
+
+# Step 2: Merge whale strandings with SST data on 'Year'
+combined_data = pd.merge(whale_by_year, sst_data, on='Year')
+
+# Step 3: Create the 3D plot with SST, Whale Strandings, and Year
+fig = plt.figure(figsize=(10, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# X, Y, Z coordinates
+x = combined_data['Mean_SST']  # Sea Surface Temperature (SST) on X-axis
+y = combined_data['National Database Number']  # Whale Strandings on Y-axis
+z = combined_data['Year']  # Year on Z-axis
+
+# Scatter plot for the 3D graph
+ax.scatter(x, y, z, c='blue', marker='o')
+
+# Setting labels for each axis
+ax.set_xlabel('Mean Sea Surface Temperature (°C)')
+ax.set_ylabel('Number of Whale Strandings')
+ax.set_zlabel('Year')
+
+# Add a title
+ax.set_title('3D Plot of Whale Strandings, SST, and Year')
+
+plt.show()
