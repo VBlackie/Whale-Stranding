@@ -1,6 +1,7 @@
 # Whale Stranding Analysis Project 🐋📊
 
 This project explores whale stranding events between 2005 and 2015 using data from NOAA. We delve into key factors that may influence strandings, such as human interaction and environmental changes like sea surface temperature (SST). The analysis combines data visualization, geographic mapping, and statistical methods to better understand patterns of whale strandings and their potential causes.
+** You can read the Project here [a link](https://github.com/VBlackie/Whale-Stranding/blob/master/Whale%20Stranding.ipynb) **
 
 ## Project Structure 🗂️
 
